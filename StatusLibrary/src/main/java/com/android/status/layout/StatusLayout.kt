@@ -8,7 +8,8 @@ import android.widget.FrameLayout
 import com.android.status.layout.StatusX.statusHide
 import com.android.status.layout.StatusX.statusShow
 
-class StatusLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : FrameLayout(context, attrs, defStyleAttr) {
+class StatusLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
+    FrameLayout(context, attrs, defStyleAttr) {
 
     companion object {
         const val NORMAL = "StatusLayout:Normal"
@@ -50,13 +51,21 @@ class StatusLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
         }
 
 
-    var onStatusClickListener: OnStatusClickListener? = null
-
     private var mNorMalView: View? = null
     private var mLoadingView: View? = null
     private var mEmptyView: View? = null
     private var mSuccessView: View? = null
     private var mErrorView: View? = null
+
+    var onStatusErrorClick: ((view: View) -> Unit)? = null
+
+    var onStatusEmptyClick: ((view: View) -> Unit)? = null
+
+    var onStatusLoadingClick: ((view: View) -> Unit)? = null
+
+    var onStatusSuccessClick: ((view: View) -> Unit)? = null
+
+    var onStatusNormalClick: ((view: View) -> Unit)? = null
 
     init {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.StatusLayout)
@@ -94,7 +103,7 @@ class StatusLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
                     mNorMalView = null
                 }
                 mNorMalView = view
-                mNorMalView?.setOnClickListener { v -> onStatusClickListener?.onStatusErrorClick(v) }
+                mNorMalView?.setOnClickListener { v -> onStatusNormalClick?.invoke(v) }
             }
             LOADING -> {
                 mLoadingView?.let {
@@ -102,7 +111,7 @@ class StatusLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
                     mLoadingView = null
                 }
                 mLoadingView = view
-                mLoadingView?.setOnClickListener { v -> onStatusClickListener?.onStatusLoadingClick(v) }
+                mLoadingView?.setOnClickListener { v -> onStatusLoadingClick?.invoke(v) }
             }
             SUCCESS -> {
                 mSuccessView?.let {
@@ -110,7 +119,7 @@ class StatusLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
                     mSuccessView = null
                 }
                 mSuccessView = view
-                mSuccessView?.setOnClickListener { v -> onStatusClickListener?.onStatusSuccessClick(v) }
+                mSuccessView?.setOnClickListener { v -> onStatusSuccessClick?.invoke(v) }
             }
             ERROR -> {
                 mErrorView?.let {
@@ -118,7 +127,7 @@ class StatusLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
                     mErrorView = null
                 }
                 mErrorView = view
-                mErrorView?.setOnClickListener { v -> onStatusClickListener?.onStatusErrorClick(v) }
+                mErrorView?.setOnClickListener { v -> onStatusErrorClick?.invoke(v) }
             }
             EMPTY -> {
                 mSuccessView?.let {
@@ -126,7 +135,7 @@ class StatusLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
                     mSuccessView = null
                 }
                 mEmptyView = view
-                mEmptyView?.setOnClickListener { v -> onStatusClickListener?.onStatusEmptyClick(v) }
+                mEmptyView?.setOnClickListener { v -> onStatusEmptyClick?.invoke(v) }
             }
         }
 

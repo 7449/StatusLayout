@@ -3,10 +3,10 @@ package com.android.statuslayout.sample
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import androidx.appcompat.app.AppCompatActivity
-import com.android.status.layout.SimpleOnStatusClickListener
 import com.android.status.layout.StatusLayout
+import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,16 +17,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         statusLayout = findViewById(R.id.status_root_view)
 //        statusLayout.addSuccessView(StatusLayout(this))
-        statusLayout.onStatusClickListener = object : SimpleOnStatusClickListener() {
-            override fun onStatusEmptyClick(view: View) {
-                super.onStatusEmptyClick(view)
-            }
-
-            override fun onStatusErrorClick(view: View) {
-                super.onStatusErrorClick(view)
-            }
-        }
 //        statusLayout.status = StatusLayout.LOADING
+        statusLayout.onStatusEmptyClick = {
+            Toast.makeText(this,"",Toast.LENGTH_SHORT).show()
+        }
+        statusLayout.onStatusErrorClick = { }
+        statusLayout.onStatusLoadingClick = { }
+        statusLayout.onStatusNormalClick = { }
+        statusLayout.onStatusSuccessClick = { }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

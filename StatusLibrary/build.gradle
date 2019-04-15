@@ -23,7 +23,7 @@ android {
         abortOnError false
     }
 }
-version = "beta05"
+version = "beta06"
 group = "com.ydevelop"
 androidArtifact {
     artifactId = "status-layout"
