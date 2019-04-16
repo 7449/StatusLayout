@@ -3,10 +3,9 @@ package com.android.statuslayout.sample
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import com.android.status.layout.StatusLayout
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.android.status.layout.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,12 +18,28 @@ class MainActivity : AppCompatActivity() {
 //        statusLayout.addSuccessView(StatusLayout(this))
 //        statusLayout.status = StatusLayout.LOADING
         statusLayout.onStatusEmptyClick = {
-            Toast.makeText(this,"",Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
         }
+
         statusLayout.onStatusErrorClick = { }
         statusLayout.onStatusLoadingClick = { }
         statusLayout.onStatusNormalClick = { }
         statusLayout.onStatusSuccessClick = { }
+
+        statusLayout.apply {
+            onStatusEmptyClick = {}
+            onStatusErrorClick = {}
+            onStatusLoadingClick = {}
+            onStatusNormalClick = {}
+            onStatusSuccessClick = {}
+        }
+
+        statusLayout
+            .EmptyClick { Toast.makeText(this, "Empty", Toast.LENGTH_SHORT).show() }
+            .ErrorClick { Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show() }
+            .LoadingClick { Toast.makeText(this, "Loading", Toast.LENGTH_SHORT).show() }
+            .NormalClick { Toast.makeText(this, "Normal", Toast.LENGTH_SHORT).show() }
+            .SuccessClick { Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show() }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -34,6 +49,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         statusLayout.status = item.title.toString()
+        statusLayout.status(item.title.toString())
         return true
     }
 

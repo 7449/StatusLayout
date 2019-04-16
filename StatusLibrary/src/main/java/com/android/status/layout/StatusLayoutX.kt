@@ -1,3 +1,5 @@
+@file:Suppress("FunctionName")
+
 package com.android.status.layout
 
 import android.view.LayoutInflater
@@ -52,3 +54,34 @@ fun StatusLayout.addEmptyView(emptyView: View, params: FrameLayout.LayoutParams?
 fun StatusLayout.addSuccessView(successView: View, params: FrameLayout.LayoutParams?) = addViewDone(StatusLayout.SUCCESS, successView, params)
 
 fun StatusLayout.addErrorView(errorView: View, params: FrameLayout.LayoutParams?) = addViewDone(StatusLayout.ERROR, errorView, params)
+
+fun StatusLayout.ErrorClick(click: ((view: View) -> Unit)): StatusLayout {
+    this.onStatusErrorClick = click
+    return this
+}
+
+fun StatusLayout.SuccessClick(click: ((view: View) -> Unit)): StatusLayout {
+    this.onStatusSuccessClick = click
+    return this
+}
+
+fun StatusLayout.NormalClick(click: ((view: View) -> Unit)): StatusLayout {
+    this.onStatusNormalClick = click
+    return this
+}
+
+fun StatusLayout.LoadingClick(click: ((view: View) -> Unit)): StatusLayout {
+    this.onStatusLoadingClick = click
+    return this
+}
+
+fun StatusLayout.EmptyClick(click: ((view: View) -> Unit)): StatusLayout {
+    this.onStatusEmptyClick = click
+    return this
+}
+
+fun StatusLayout.status(status: String): StatusLayout {
+    this.status = status
+    return this
+}
+

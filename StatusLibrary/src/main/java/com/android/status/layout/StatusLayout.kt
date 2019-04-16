@@ -58,13 +58,9 @@ class StatusLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
     private var mErrorView: View? = null
 
     var onStatusErrorClick: ((view: View) -> Unit)? = null
-
     var onStatusEmptyClick: ((view: View) -> Unit)? = null
-
     var onStatusLoadingClick: ((view: View) -> Unit)? = null
-
     var onStatusSuccessClick: ((view: View) -> Unit)? = null
-
     var onStatusNormalClick: ((view: View) -> Unit)? = null
 
     init {
