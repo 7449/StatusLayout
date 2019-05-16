@@ -19,7 +19,7 @@ class StatusLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
         const val ERROR = "StatusLayout:Error"
     }
 
-    var status: String = NORMAL
+    var status: String = ""
         set(value) {
             if (TextUtils.equals(field, value)) {
                 return
