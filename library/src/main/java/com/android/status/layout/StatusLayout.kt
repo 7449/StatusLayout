@@ -90,7 +90,6 @@ class StatusLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
         currentStatus?.let { status = it }
     }
 
-
     internal fun addViewDone(status: String, view: View?, layoutParams: LayoutParams?) {
         when (status) {
             NORMAL -> {
@@ -134,7 +133,6 @@ class StatusLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
                 mEmptyView?.setOnClickListener { v -> onStatusEmptyClick?.invoke(v) }
             }
         }
-
         if (layoutParams != null) {
             addView(view, layoutParams)
         } else {

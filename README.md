@@ -8,7 +8,7 @@ Android StatusLayout
 
 ## Gradle
 
-    implementation "com.ydevelop:status-layout:beta07"
+    implementation "com.ydevelop:status-layout:beta08"
 
 ## attr
 
