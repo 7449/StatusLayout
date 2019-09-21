@@ -2,19 +2,16 @@
 
 package com.android.status.layout
 
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
 import androidx.annotation.LayoutRes
 import com.android.status.layout.StatusX.defaultParams
+import com.android.status.layout.StatusX.viewLayout
 
 /**
  * @author y
  * @create 2019/3/12
  */
-
-internal fun StatusLayout.viewLayout(@LayoutRes id: Int): View = LayoutInflater.from(context).inflate(id, this, false)
-
 fun StatusLayout.addNorMalView(@LayoutRes normalLayoutRes: Int) = addNorMalView(normalLayoutRes, defaultParams())
 
 fun StatusLayout.addLoadingView(@LayoutRes loadingLayoutRes: Int) = addLoadingView(loadingLayoutRes, defaultParams())
@@ -55,27 +52,27 @@ fun StatusLayout.addSuccessView(successView: View, params: FrameLayout.LayoutPar
 
 fun StatusLayout.addErrorView(errorView: View, params: FrameLayout.LayoutParams?) = addViewDone(StatusLayout.ERROR, errorView, params)
 
-fun StatusLayout.ErrorClick(click: ((view: View) -> Unit)): StatusLayout {
+fun StatusLayout.OnErrorClick(click: (view: View) -> Unit): StatusLayout {
     this.onStatusErrorClick = click
     return this
 }
 
-fun StatusLayout.SuccessClick(click: ((view: View) -> Unit)): StatusLayout {
+fun StatusLayout.OnSuccessClick(click: (view: View) -> Unit): StatusLayout {
     this.onStatusSuccessClick = click
     return this
 }
 
-fun StatusLayout.NormalClick(click: ((view: View) -> Unit)): StatusLayout {
+fun StatusLayout.OnNormalClick(click: (view: View) -> Unit): StatusLayout {
     this.onStatusNormalClick = click
     return this
 }
 
-fun StatusLayout.LoadingClick(click: ((view: View) -> Unit)): StatusLayout {
+fun StatusLayout.OnLoadingClick(click: (view: View) -> Unit): StatusLayout {
     this.onStatusLoadingClick = click
     return this
 }
 
-fun StatusLayout.EmptyClick(click: ((view: View) -> Unit)): StatusLayout {
+fun StatusLayout.OnEmptyClick(click: (view: View) -> Unit): StatusLayout {
     this.onStatusEmptyClick = click
     return this
 }

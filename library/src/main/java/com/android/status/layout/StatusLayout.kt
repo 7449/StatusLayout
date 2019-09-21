@@ -8,8 +8,7 @@ import android.widget.FrameLayout
 import com.android.status.layout.StatusX.statusHide
 import com.android.status.layout.StatusX.statusShow
 
-class StatusLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
-    FrameLayout(context, attrs, defStyleAttr) {
+class StatusLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : FrameLayout(context, attrs, defStyleAttr) {
 
     companion object {
         const val NORMAL = "StatusLayout:Normal"
