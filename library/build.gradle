@@ -1,6 +1,5 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 apply plugin: "guru.stefma.bintrayrelease"
 
 android {
@@ -17,7 +16,7 @@ android {
         kotlinOptions.freeCompilerArgs += ['-module-name', "com.ydevelop.statuslayout"]
     }
 }
-version = "beta09"
+version = "1.0.0"
 group = "com.ydevelop"
 androidArtifact {
     artifactId = "status-layout"

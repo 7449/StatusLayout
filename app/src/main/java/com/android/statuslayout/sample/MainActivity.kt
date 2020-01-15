@@ -35,11 +35,11 @@ class MainActivity : AppCompatActivity() {
         }
 
         statusLayout
-                .OnEmptyClick { Toast.makeText(this, "Empty", Toast.LENGTH_SHORT).show() }
-                .OnErrorClick { Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show() }
-                .OnLoadingClick { Toast.makeText(this, "Loading", Toast.LENGTH_SHORT).show() }
-                .OnNormalClick { Toast.makeText(this, "Normal", Toast.LENGTH_SHORT).show() }
-                .OnSuccessClick { Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show() }
+            .OnEmptyClick { Toast.makeText(this, "Empty", Toast.LENGTH_SHORT).show() }
+            .OnErrorClick { Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show() }
+            .OnLoadingClick { Toast.makeText(this, "Loading", Toast.LENGTH_SHORT).show() }
+            .OnNormalClick { Toast.makeText(this, "Normal", Toast.LENGTH_SHORT).show() }
+            .OnSuccessClick { Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show() }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         statusLayout.status = item.title.toString()
-        statusLayout.status(item.title.toString())
+        statusLayout.setStatus(item.title.toString())
         return true
     }
 

@@ -5,10 +5,12 @@ import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
-import com.android.status.layout.StatusX.statusHide
-import com.android.status.layout.StatusX.statusShow
 
-class StatusLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : FrameLayout(context, attrs, defStyleAttr) {
+class StatusLayout @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : FrameLayout(context, attrs, defStyleAttr) {
 
     companion object {
         const val NORMAL = "StatusLayout:Normal"
@@ -23,53 +25,52 @@ class StatusLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
             if (TextUtils.equals(field, value)) {
                 return
             }
-            mNorMalView.statusHide()
-            mLoadingView.statusHide()
-            mEmptyView.statusHide()
-            mSuccessView.statusHide()
-            mErrorView.statusHide()
+            hideAllView()
             when (value) {
-                NORMAL -> mNorMalView.statusShow()
-                LOADING -> mLoadingView.statusShow()
-                EMPTY -> mEmptyView.statusShow()
-                SUCCESS -> mSuccessView.statusShow()
-                ERROR -> mErrorView.statusShow()
+                NORMAL -> norMalView.statusShow()
+                LOADING -> loadingView.statusShow()
+                EMPTY -> emptyView.statusShow()
+                SUCCESS -> successView.statusShow()
+                ERROR -> errorView.statusShow()
             }
             field = value
         }
 
-    var currentView: View? = null
-        private set
+    var norMalView: View? = null
+    var loadingView: View? = null
+    var emptyView: View? = null
+    var successView: View? = null
+    var errorView: View? = null
+    val currentView: View?
         get() = when (status) {
-            NORMAL -> mNorMalView
-            LOADING -> mLoadingView
-            EMPTY -> mEmptyView
-            SUCCESS -> mSuccessView
-            ERROR -> mErrorView
-            else -> throw RuntimeException("please check status")
+            NORMAL -> norMalView
+            LOADING -> loadingView
+            EMPTY -> emptyView
+            SUCCESS -> successView
+            ERROR -> errorView
+            else -> null
         }
 
-
-    private var mNorMalView: View? = null
-    private var mLoadingView: View? = null
-    private var mEmptyView: View? = null
-    private var mSuccessView: View? = null
-    private var mErrorView: View? = null
-
-    var onStatusErrorClick: ((view: View) -> Unit)? = null
-    var onStatusEmptyClick: ((view: View) -> Unit)? = null
-    var onStatusLoadingClick: ((view: View) -> Unit)? = null
-    var onStatusSuccessClick: ((view: View) -> Unit)? = null
     var onStatusNormalClick: ((view: View) -> Unit)? = null
+    var onStatusLoadingClick: ((view: View) -> Unit)? = null
+    var onStatusEmptyClick: ((view: View) -> Unit)? = null
+    var onStatusSuccessClick: ((view: View) -> Unit)? = null
+    var onStatusErrorClick: ((view: View) -> Unit)? = null
 
     init {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.StatusLayout)
-        val mNormalLayoutId = typedArray.getResourceId(R.styleable.StatusLayout_status_normal_layout, View.NO_ID)
-        val mLoadingLayoutId = typedArray.getResourceId(R.styleable.StatusLayout_status_loading_layout, View.NO_ID)
-        val mEmptyLayoutId = typedArray.getResourceId(R.styleable.StatusLayout_status_empty_layout, View.NO_ID)
-        val mSuccessLayoutId = typedArray.getResourceId(R.styleable.StatusLayout_status_success_layout, View.NO_ID)
-        val mErrorLayoutId = typedArray.getResourceId(R.styleable.StatusLayout_status_error_layout, View.NO_ID)
-        val currentStatus = typedArray.getString(R.styleable.StatusLayout_status_current_status)
+        val mNormalLayoutId =
+            typedArray.getResourceId(R.styleable.StatusLayout_status_normal_layout, View.NO_ID)
+        val mLoadingLayoutId =
+            typedArray.getResourceId(R.styleable.StatusLayout_status_loading_layout, View.NO_ID)
+        val mEmptyLayoutId =
+            typedArray.getResourceId(R.styleable.StatusLayout_status_empty_layout, View.NO_ID)
+        val mSuccessLayoutId =
+            typedArray.getResourceId(R.styleable.StatusLayout_status_success_layout, View.NO_ID)
+        val mErrorLayoutId =
+            typedArray.getResourceId(R.styleable.StatusLayout_status_error_layout, View.NO_ID)
+        val currentStatus =
+            typedArray.getString(R.styleable.StatusLayout_status_current_status)
         typedArray.recycle()
         if (mNormalLayoutId != View.NO_ID) {
             addNorMalView(mNormalLayoutId)
@@ -92,44 +93,44 @@ class StatusLayout @JvmOverloads constructor(context: Context, attrs: AttributeS
     internal fun addViewDone(status: String, view: View?, layoutParams: LayoutParams?) {
         when (status) {
             NORMAL -> {
-                mNorMalView?.let {
+                norMalView?.let {
                     this@StatusLayout.removeView(it)
-                    mNorMalView = null
+                    norMalView = null
                 }
-                mNorMalView = view
-                mNorMalView?.setOnClickListener { v -> onStatusNormalClick?.invoke(v) }
+                norMalView = view
+                norMalView?.setOnClickListener { v -> onStatusNormalClick?.invoke(v) }
             }
             LOADING -> {
-                mLoadingView?.let {
+                loadingView?.let {
                     this@StatusLayout.removeView(it)
-                    mLoadingView = null
+                    loadingView = null
                 }
-                mLoadingView = view
-                mLoadingView?.setOnClickListener { v -> onStatusLoadingClick?.invoke(v) }
+                loadingView = view
+                loadingView?.setOnClickListener { v -> onStatusLoadingClick?.invoke(v) }
             }
             SUCCESS -> {
-                mSuccessView?.let {
+                successView?.let {
                     this@StatusLayout.removeView(it)
-                    mSuccessView = null
+                    successView = null
                 }
-                mSuccessView = view
-                mSuccessView?.setOnClickListener { v -> onStatusSuccessClick?.invoke(v) }
+                successView = view
+                successView?.setOnClickListener { v -> onStatusSuccessClick?.invoke(v) }
             }
             ERROR -> {
-                mErrorView?.let {
+                errorView?.let {
                     this@StatusLayout.removeView(it)
-                    mErrorView = null
+                    errorView = null
                 }
-                mErrorView = view
-                mErrorView?.setOnClickListener { v -> onStatusErrorClick?.invoke(v) }
+                errorView = view
+                errorView?.setOnClickListener { v -> onStatusErrorClick?.invoke(v) }
             }
             EMPTY -> {
-                mSuccessView?.let {
+                emptyView?.let {
                     this@StatusLayout.removeView(it)
-                    mSuccessView = null
+                    emptyView = null
                 }
-                mEmptyView = view
-                mEmptyView?.setOnClickListener { v -> onStatusEmptyClick?.invoke(v) }
+                emptyView = view
+                emptyView?.setOnClickListener { v -> onStatusEmptyClick?.invoke(v) }
             }
         }
         if (layoutParams != null) {
