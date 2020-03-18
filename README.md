@@ -2,6 +2,36 @@
 
 Android StatusLayout
 
+## StatusView
+
+see demo:
+
+[StatusViewActivity](./app/src/main/java/com/android/statuslayout/sample/StatusViewActivity.kt)
+
+## description
+
+    val statusView = StatusView(context)
+    statusView.addView(Status(Status.ERROR,statusView.createView(R.layout.status_view_layout)))
+    statusView.addView(Status(CUSTOM,statusView.createView(R.layout.status_view_layout)))
+    statusView.show(Status.ERROR) 
+    statusView.show(CUSTOM)
+    
+## activity
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            val statusView = Status.bind(this)
+    }
+    
+## click
+
+    statusView.onClick(status) { view ->
+    }
+    
+## currentView
+
+    statusView.currentView
+
 ## screenshot
 
 ![](https://github.com/7449/StatusLayout/blob/master/screenshot/statuslayout.gif)

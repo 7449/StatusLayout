@@ -24,7 +24,7 @@ val defaultLayoutParams: FrameLayout.LayoutParams
  */
 fun View?.statusShow() {
     if (this != null) {
-        if (visibility == View.GONE) {
+        if (visibility == View.GONE || visibility == View.INVISIBLE) {
             visibility = View.VISIBLE
         }
     }
@@ -35,7 +35,7 @@ fun View?.statusShow() {
  */
 fun View?.statusHide() {
     if (this != null) {
-        if (visibility == View.VISIBLE) {
+        if (visibility == View.VISIBLE || visibility == View.INVISIBLE) {
             visibility = View.GONE
         }
     }

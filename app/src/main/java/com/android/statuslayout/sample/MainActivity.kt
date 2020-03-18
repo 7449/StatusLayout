@@ -1,5 +1,6 @@
 package com.android.statuslayout.sample
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -16,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         statusLayout = findViewById(R.id.status_root_view)
 //        statusLayout.addSuccessView(StatusLayout(this))
-//        statusLayout.status = StatusLayout.LOADING
+        statusLayout.status = StatusLayout.SUCCESS
         statusLayout.onStatusEmptyClick = {
             Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
         }
@@ -39,7 +40,9 @@ class MainActivity : AppCompatActivity() {
             .OnErrorClick { Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show() }
             .OnLoadingClick { Toast.makeText(this, "Loading", Toast.LENGTH_SHORT).show() }
             .OnNormalClick { Toast.makeText(this, "Normal", Toast.LENGTH_SHORT).show() }
-            .OnSuccessClick { Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show() }
+            .OnSuccessClick {
+                startActivity(Intent(this, StatusViewActivity::class.java))
+            }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
