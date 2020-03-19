@@ -7,16 +7,21 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.android.status.layout.*
+import com.android.statuslayout.sample.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var statusLayout: StatusLayout
+    private val binding by lazy {
+        ActivityMainBinding.inflate(layoutInflater)
+    }
+
+    private val statusLayout by lazy {
+        binding.statusRootView
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        statusLayout = findViewById(R.id.status_root_view)
-//        statusLayout.addSuccessView(StatusLayout(this))
+        setContentView(binding.root)
         statusLayout.status = StatusLayout.SUCCESS
         statusLayout.onStatusEmptyClick = {
             Toast.makeText(this, "", Toast.LENGTH_SHORT).show()
