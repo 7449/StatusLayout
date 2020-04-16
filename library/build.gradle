@@ -16,7 +16,7 @@ android {
         kotlinOptions.freeCompilerArgs += ['-module-name', "com.ydevelop.statuslayout"]
     }
 }
-version = "1.0.0"
+version = "1.0.1"
 group = "com.ydevelop"
 androidArtifact {
     artifactId = "status-layout"
