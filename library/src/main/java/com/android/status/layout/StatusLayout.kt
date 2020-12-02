@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
 
+@Deprecated("@see StatusView")
 class StatusLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
